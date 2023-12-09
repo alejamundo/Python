@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Brisas de Tokio</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/logo1.png'%}"
+      type="image/x-icon"
+    />
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,
+      shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style1.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white overlay-menu bg-white">
+        <div class="container-fluid">
+          <button
+          class="navbar-toggler bg-white" 
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-2  hide-on-large-screen">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  ><img
+                    src="{% static 'img/logo1.png'%}"
+                    alt="logo"
+                    width="30%"
+                  />Brisas de Tokio</a
+                >
+              </li>
+            </ul>
+            <style>
+              
+              @media (max-width: 1060px) {
+              .hide-on-large-screen {
+                display: none;
+              }
+            }
+              .overlay-menu {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000; /* Ajusta este valor según sea necesario para que el menú se muestre por encima de otros elementos */
+                background-color: white; /
+              }
+              .navbar-toggler:focus {
+                background-color: white; /* Fondo blanco cuando el botón está en estado activo */
+              }
+           </style>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-white">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  >Inicio</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'zonascomunes' %}"
+                  >Zonas Comunes</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Registros
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'registroresidentes' %}">Registro Recidentes y propietarios</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroinmuebles' %}">Registro de Inmuebles</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovisitantes' %}">Registro de Visitantes</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroencargados' %}">Registro Encargados de zonas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovehiculos' %}">Registro Vehiculos de residentes</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'reservas' %}"
+                  >Reservas</a
+                >
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Gestionar PQRSD
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'pqrs' %}">Crear PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'procesarpqrs' %}">Gestionar PQRSD</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Listados de información
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'listadoreservas' %}">Listado de reservas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadopqrs' %}">Listado de PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadoinmuebles' %}">Listado de Inmuebles</a></li>
+                </ul>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="p-lg-4" >
+      <div id="carouselExampleIndicators" class="carousel slide p-4">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            {% if messages %}
+            <div class="alert alert-success">
+              <ul class="m-0">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            <img
+              src="{% static 'img/cursos1.jpg'%}"
+              class="d-block w-100"
+              alt="Imagen"
+            />
+          </div>
+        </div>
+      </div>
+      <!--Cars-->
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card">
+            <img
+              src="{% static 'img/c11.png'%}"
+              class="card-img-top"
+              alt="imagen"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <strong class="color"> Reservas de Zonas Comunes </strong>
+              </h5>
+              <p class="card-text">
+                El sistema de reservas de zonas comunes permite a los residentes
+                del conjunto residencial reservar fácilmente las áreas comunes,
+                como el Salón Social, la Zona BBQ, la Cancha Sintética y la Zona
+                Húmeda. Puedes programar tu reserva en función de tus
+                necesidades, verificar la disponibilidad y gestionar tus
+                reservas existentes.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img
+              src="{% static 'img/c22.png'%}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <strong class="color"> Registro de Visitantes </strong>
+              </h5>
+              <p class="card-text">
+                Con nuestro sistema de registro de visitantes, los residentes
+                pueden garantizar un ingreso seguro de visitantes externos.
+                Registra a tus invitados proporcionando sus datos, números de
+                identificación y detalles de contacto. Los residentes recibirán
+                notificaciones cuando los visitantes sean autorizados para el
+                ingreso.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img
+              src="{% static 'img/c33.png'%}"
+              class="card-img-top"
+              alt="imagen"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <strong class="color">
+                  Peticiones, Quejas, Reclamos y Más</strong
+                >
+              </h5>
+              <p class="card-text">
+                Nuestra plataforma facilita la presentación de peticiones,
+                quejas, reclamos, solicitudes, denuncias y felicitaciones
+                (PQRSD) dentro del conjunto residencial. Registra tus
+                inquietudes y necesidades, y sigue el estado de tus solicitudes.
+                El sistema brinda transparencia en la gestión y te permite
+                recibir respuestas y actualizaciones oportunas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+   
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{%static 'js/script.js'%}"></script>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Brisas de Tokio</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/logo1.png'%}"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,
+      shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style1.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white overlay-menu bg-white">
+        <div class="container-fluid">
+          <button
+          class="navbar-toggler bg-white" 
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-2  hide-on-large-screen">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  ><img
+                    src="{% static 'img/logo1.png'%}"
+                    alt="logo"
+                    width="30%"
+                  />Brisas de Tokio</a
+                >
+              </li>
+            </ul>
+            <style>
+              
+              @media (max-width: 1060px) {
+              .hide-on-large-screen {
+                display: none;
+              }
+            }
+              .overlay-menu {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000; /* Ajusta este valor según sea necesario para que el menú se muestre por encima de otros elementos */
+                background-color: white; /
+              }
+              .navbar-toggler:focus {
+                background-color: white; /* Fondo blanco cuando el botón está en estado activo */
+              }
+           </style>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-white">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  >Inicio</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'zonascomunes' %}"
+                  >Zonas Comunes</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Registros
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'registroresidentes' %}">Registro Recidentes y propietarios</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroinmuebles' %}">Registro de Inmuebles</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovisitantes' %}">Registro de Visitantes</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroencargados' %}">Registro Encargados de zonas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovehiculos' %}">Registro Vehiculos de residentes</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'reservas' %}"
+                  >Reservas</a
+                >
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Gestionar PQRSD
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'pqrs' %}">Crear PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'procesarpqrs' %}">Gestionar PQRSD</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Listados de información
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'listadoreservas' %}">Listado de reservas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadopqrs' %}">Listado de PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadoinmuebles' %}">Listado de Inmuebles</a></li>
+                </ul>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="p-lg-4">
+        {% if messages %}
+        <div class="alert alert-success">
+          <ul class="m-0">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+               
+              <form method="post" class='row' action="{% url 'registroinmuebles' %}">
+                {% csrf_token %}
+                <h3>Registro de Inmuebles  <img src="{% static 'img/state.png' %}" width='5%' alt="img state" ></h3>
+    
+                <div class="mb3- col-md-6">
+                    <label for="nomenclatura" class="form-label">Nomenclatura:</label>
+                    <input type="number" name="nomenclatura" required class='form-control rounded'>
+                </div>
+    
+                <div class="mb-3 col-md-6">
+                    <label for="coeficiente" class="form-label"
+                      >Coeficiente:</label
+                    >
+                    <input type="number" name="coeficiente" required class='form-control rounded' max='99'>
+                </div>
+
+                
+                <div class="mb-3 col-md-6">
+                    <label for="tipo_inmueble" class="form-label"
+                      >Tipo de Inmueble:</label
+                    >
+                    <select name="tipo_inmueble" required class='form-select rounded'>
+                        <option value="">Seleciona una opción...</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Parqueadero">Parqueadero</option>
+                        <option value="CuartoUtil">Cuarto Util</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 col-md-12">
+                    <label for="propietarios" class="form-label"
+                      >Seleccione los Propietarios del inmueble:</label
+                    >
+                    <select name="propietarios" required class='form-select rounded' multiple>
+                        <option value="">Seleciona los porpietarios...</option>
+                        {% for propietario in propietarios %}
+                        <option value="{{ propietario.persona.id }}">
+                            Nombre: {{ propietario.persona.nombres }} {{ propietario.persona.apellidos }}- Cedula: {{ propietario.persona.numero_identificacion }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3 col-md-12">
+                    <div id="apartamento_fields" style="display: none;">
+                        <label for="numero_apartamento" class="form-label">Número de Apartamento:</label>
+                        <input type="text" name="numero_apartamento" class='form-control rounded' value='-'>
+            
+                        <label for="torre" class="form-label">Torre:</label>
+                        <input type="text" name="torre" class='form-control rounded mb-3' value='-'>
+            
+                        <label for="residentes" class="form-label">Seleccione los Residentes del Apartamento:</label>
+                        <select name="residentes" multiple class='form-select rounded mb-3'>
+                            <option value="">Seleciona los residentes...</option>
+                            {% for residente in residentes %}
+                                <option value="{{ residente.persona.id }}"> Nombre: {{ residente.persona.nombres }}- Cedula: {{ residente.persona.numero_identificacion }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="residentes_autorizados" class="form-label">Seleccione los Residentes autorizados para permitir ingreso:</label>
+                        <select name="residentes_autorizados" multiple class='form-select rounded mb-3'>
+                            <option value="">Seleciona los residentes...</option>
+                            {% for residente in residentes %}
+                                <option value="{{ residente.persona.id }}"> Nombre: {{ residente.persona.nombres }}- Cedula: {{ residente.persona.numero_identificacion }}</option>
+                            {% endfor %}
+                        </select>
+                           
+                    </div>
+                </div>
+  
+                <div class="mt-4 col-auto">
+                    <button type="submit" class="btn btn-success mb-3">Registrar Inmueble</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </main>
+
+    <script>
+        // Mostrar u ocultar campos específicos según el tipo de inmueble seleccionado
+        const tipoInmuebleSelect = document.querySelector('select[name="tipo_inmueble"]');
+        const apartamentoFields = document.getElementById('apartamento_fields');
+
+        tipoInmuebleSelect.addEventListener('change', function() {
+            if (tipoInmuebleSelect.value === 'Apartamento') {
+                apartamentoFields.style.display = 'block';
+            } else {
+                apartamentoFields.style.display = 'none';
+            }
+        });
+    </script>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{%static 'js/script.js'%}"></script>
+  </body>
+</html>

@@ -1,0 +1,619 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Brisas de Tokio</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/logo1.png'%}"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,
+      shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style1.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white overlay-menu bg-white">
+        <div class="container-fluid">
+          <button
+          class="navbar-toggler bg-white" 
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-2  hide-on-large-screen">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  ><img
+                    src="{% static 'img/logo1.png'%}"
+                    alt="logo"
+                    width="30%"
+                  />Brisas de Tokio</a
+                >
+              </li>
+            </ul>
+            <style>
+              
+              @media (max-width: 1060px) {
+              .hide-on-large-screen {
+                display: none;
+              }
+            }
+              .overlay-menu {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000; /* Ajusta este valor según sea necesario para que el menú se muestre por encima de otros elementos */
+                background-color: white; /
+              }
+              .navbar-toggler:focus {
+                background-color: white; /* Fondo blanco cuando el botón está en estado activo */
+              }
+           </style>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-white">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  >Inicio</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'zonascomunes' %}"
+                  >Zonas Comunes</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Registros
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'registroresidentes' %}">Registro Recidentes y propietarios</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroinmuebles' %}">Registro de Inmuebles</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovisitantes' %}">Registro de Visitantes</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroencargados' %}">Registro Encargados de zonas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovehiculos' %}">Registro Vehiculos de residentes</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'reservas' %}"
+                  >Reservas</a
+                >
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Gestionar PQRSD
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'pqrs' %}">Crear PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'procesarpqrs' %}">Gestionar PQRSD</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Listados de información
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'listadoreservas' %}">Listado de reservas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadopqrs' %}">Listado de PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadoinmuebles' %}">Listado de Inmuebles</a></li>
+                </ul>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="p-lg-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            {% comment %} Mensaje de alerta si guarada la información {% endcomment %}
+            {% if messages %}
+            <div class="container mt-4">
+                {% for message in messages %}
+                <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+                >
+                {{ message }}
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+          <form class='row' id="zonaComunForm" action="{% url 'reservas' %}" method="post">
+            {% csrf_token %}
+            <h3>Reserva de Zonas Comunes <img src="{% static 'img/park.png' %}" width='5%' alt="zona comun" ></h3>
+
+            <div class="mb-3 col-md-6">
+              <label for="zonaComun" class="form-label">Seleccione una Zona Común:</label>
+              <select
+                id="zonaComun"
+                name="zonaComun"
+                onchange="mostrarHorariosDisponibles();"
+                class='form-select rounded'
+                required
+              >
+                <option>Selecciona una zona..</option>
+                <option value="SalonSocial">Salón Social</option>
+                <option value="ZonaBBQ">Zona BBQ</option>
+                <option value="CanchaSintetica">Cancha Sintética</option>
+                <option value="ZonaHumeda">Zona Húmeda</option>
+              </select>
+            </div>
+
+            <div class="mb-3 col-md-6">
+              <label for="numero_apartamento" class="form-label">Elige un número de apartamento:</label>
+              <select name="numero_apartamento" id="numero_apartamento" class='form-select rounded' required>
+                <option value="" selected disabled>
+                  Selecciona un número de apartamento
+                </option>
+                {% for apartamento in apartamentos %}
+                <option value="{{ apartamento.id }}">
+                  {{ apartamento.numero_apartamento }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label for="visitantes" class="form-label">
+                Elige los visitantes (máximo:
+                <span id="capacidadMaxima">0</span>
+                ):
+              </label>
+              <select name="visitantes" id="visitantes" class='form-select rounded' required multiple>
+                {% for visitante in visitantes %}
+                <option value="{{ visitante.id }}">
+                  {{ visitante.nombres_completos }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label for="dias_reserva" class="form-label">Elige los días de reserva:</label>
+              <select name="dias_reserva" id="dias_reserva" onchange="mostrarHorariosDisponibles2();" class='form-select rounded' required>
+                <option>Selecciona un dia de la semana..</option>
+                <option value="Lunes">Lunes</option>
+                <option value="Martes">Martes</option>
+                <option value="Miércoles">Miércoles</option>
+                <option value="Jueves">Jueves</option>
+                <option value="Viernes">Viernes</option>
+                <option value="Sábado">Sábado</option>
+                <option value="Domingo">Domingo</option>
+              </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label
+              for="horarios_disponibles"
+              id="horarios_label"
+              style="display: none"
+              class="form-label"
+              >Elige un horario:</label
+              >
+              <select
+                name="horarios_disponibles"
+                id="horarios_disponibles"
+                style="display: none"
+                class='form-select rounded'
+                
+              >
+                
+                <option value="8-10">8 AM - 10 AM</option>
+                <option value="10-12">10 AM - 12 PM</option>
+                <option value="1-3">1 PM - 3 PM</option>
+                <option value="3-5">3 PM - 5 PM</option>
+              </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label
+              for="horarios_disponibles2"
+              id="horarios_label2"
+              style="display: none"
+              class="form-label"
+              >Elige un horario:</label
+              >
+              <select
+                class='form-select rounded'
+                name="horarios_disponibles2"
+                id="horarios_disponibles2"
+                style="display: none"
+                
+              >
+              
+                <option value="8-9">8 AM - 9 AM</option>
+                <option value="9-10">9 AM - 10 AM</option>
+                <option value="10-11">10 AM - 11 AM</option>
+                <option value="11-12">11 AM - 12 PM</option>
+                <option value="12-1">12 PM - 1 PM</option>
+                <option value="1-2">1 PM - 2 PM</option>
+                <option value="2-3">2 PM - 3 PM</option>
+                <option value="3-4">3 PM - 4 PM</option>
+                <option value="4-5">4 PM - 5 PM</option>
+              </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label for="reciboPago" class="form-label">Recibo de Pago:</label>
+              <input type="checkbox" name="reciboPago" id="reciboPago" value="true" >
+            </div>
+
+            <div class="mb-3 col-md-12">
+              <label for="depositoEntregado" class="form-label">Depósito Entregado:</label>
+              <input type="checkbox" name="depositoEntregado" id="depositoEntregado" value="true" >
+            </div>
+           
+            <div class="mt-4 col-auto">
+                <button type="submit" class="btn btn-success mb-3">Reservar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="limite_visitantes" style="display: none">
+        <p>¡Has alcanzado el límite de visitantes para esta zona común!</p>
+      </div>
+
+      <div id="zonaComunInfo">
+        <!-- La información de la zona seleccionada se mostrará aquí -->
+      </div>
+
+      <script>
+        var horariosSeleccionados = [];
+        var horariosUtilizadosPorDia = {};
+
+        function mostrarHorariosDisponibles2() {
+          var zonaComunSelect = document.getElementById("zonaComun");
+          var horariosLabel = document.getElementById("horarios_label2");
+          var horariosSelect = document.getElementById("horarios_disponibles2");
+          var diasReservaSelect = document.getElementById("dias_reserva");
+          var capacidadMaxima = document.getElementById("capacidadMaxima");
+
+          // Restablecer la capacidad máxima
+          capacidadMaxima.innerText = "0";
+
+          if (
+            zonaComunSelect.value === "CanchaSintetica" ||
+            zonaComunSelect.value === "ZonaHumeda"
+          ) {
+            horariosLabel.style.display = "block";
+            horariosSelect.style.display = "block";
+            actualizarHorariosDisponibles2();
+          } else {
+            horariosLabel.style.display = "none";
+            horariosSelect.style.display = "none";
+          }
+
+          diasReservaSelect.addEventListener("change", function () {
+            // Cuando cambia el día de reserva, actualiza los horarios disponibles.
+            actualizarHorariosDisponibles2();
+          });
+        }
+
+        function actualizarHorariosDisponibles2() {
+          var horariosSelect = document.getElementById("horarios_disponibles2");
+          var diaSeleccionado = document.getElementById("dias_reserva").value;
+
+          // Obtén los horarios utilizados para el día seleccionado
+          var horariosUtilizados =
+            horariosUtilizadosPorDia[diaSeleccionado] || [];
+
+          // Habilitar todas las opciones
+          for (var i = 0; i < horariosSelect.options.length; i++) {
+            horariosSelect.options[i].disabled = false;
+          }
+
+          // Deshabilitar los horarios ya seleccionados para el día seleccionado
+          for (var i = 0; i < horariosUtilizados.length; i++) {
+            for (var j = 0; j < horariosSelect.options.length; j++) {
+              if (horariosSelect.options[j].value === horariosUtilizados[i]) {
+                horariosSelect.options[j].disabled = true;
+              }
+            }
+          }
+
+          // Actualizar la capacidad máxima
+          var zonaComunSelect = document.getElementById("zonaComun");
+          var capacidadMaxima = document.getElementById("capacidadMaxima");
+
+          if (zonaComunSelect.value === "SalonSocial") {
+            capacidadMaxima.innerText = "30";
+          } else if (zonaComunSelect.value === "ZonaBBQ") {
+            capacidadMaxima.innerText = "15";
+          } else if (zonaComunSelect.value === "CanchaSintetica") {
+            capacidadMaxima.innerText = "10";
+          } else if (zonaComunSelect.value === "ZonaHumeda") {
+            capacidadMaxima.innerText = "4";
+          }
+        }
+
+        // Manejar cambios en la selección de horarios
+        document
+          .getElementById("horarios_disponibles2")
+          .addEventListener("change", function () {
+            var selectedOption = this.options[this.selectedIndex];
+            if (!selectedOption.disabled) {
+              horariosSeleccionados.push(selectedOption.value);
+
+              // Obtén el día seleccionado
+              var diaSeleccionado =
+                document.getElementById("dias_reserva").value;
+
+              // Agrega el horario utilizado al día correspondiente
+              if (!horariosUtilizadosPorDia[diaSeleccionado]) {
+                horariosUtilizadosPorDia[diaSeleccionado] = [];
+              }
+              horariosUtilizadosPorDia[diaSeleccionado].push(
+                selectedOption.value
+              );
+
+              this.selectedIndex = -1;
+              actualizarHorariosDisponibles2();
+            }
+          });
+      </script>
+
+      <script>
+        var horariosSeleccionados = [];
+        var horariosUtilizadosPorDia = {};
+
+        function mostrarHorariosDisponibles() {
+          var zonaComunSelect = document.getElementById("zonaComun");
+          var horariosLabel = document.getElementById("horarios_label");
+          var horariosSelect = document.getElementById("horarios_disponibles");
+          var diasReservaSelect = document.getElementById("dias_reserva");
+          var capacidadMaxima = document.getElementById("capacidadMaxima");
+
+          // Restablecer la capacidad máxima
+          capacidadMaxima.innerText = "0";
+
+          if (
+            zonaComunSelect.value === "SalonSocial" ||
+            zonaComunSelect.value === "ZonaBBQ"
+          ) {
+            horariosLabel.style.display = "block";
+            horariosSelect.style.display = "block";
+            actualizarHorariosDisponibles();
+          } else {
+            horariosLabel.style.display = "none";
+            horariosSelect.style.display = "none";
+          }
+
+          diasReservaSelect.addEventListener("change", function () {
+            // Cuando cambia el día de reserva, actualiza los horarios disponibles.
+            actualizarHorariosDisponibles();
+          });
+        }
+
+        function actualizarHorariosDisponibles() {
+          var horariosSelect = document.getElementById("horarios_disponibles");
+          var diaSeleccionado = document.getElementById("dias_reserva").value;
+
+          // Obtén los horarios utilizados para el día seleccionado
+          var horariosUtilizados =
+            horariosUtilizadosPorDia[diaSeleccionado] || [];
+
+          // Habilitar todas las opciones
+          for (var i = 0; i < horariosSelect.options.length; i++) {
+            horariosSelect.options[i].disabled = false;
+          }
+
+          // Deshabilitar los horarios ya seleccionados para el día seleccionado
+          for (var i = 0; i < horariosUtilizados.length; i++) {
+            for (var j = 0; j < horariosSelect.options.length; j++) {
+              if (horariosSelect.options[j].value === horariosUtilizados[i]) {
+                horariosSelect.options[j].disabled = true;
+              }
+            }
+          }
+
+          // Actualizar la capacidad máxima
+          var zonaComunSelect = document.getElementById("zonaComun");
+          var capacidadMaxima = document.getElementById("capacidadMaxima");
+
+          if (zonaComunSelect.value === "SalonSocial") {
+            capacidadMaxima.innerText = "30";
+          } else if (zonaComunSelect.value === "ZonaBBQ") {
+            capacidadMaxima.innerText = "15";
+          } else if (zonaComunSelect.value === "CanchaSintetica") {
+            capacidadMaxima.innerText = "10";
+          } else if (zonaComunSelect.value === "ZonaHumeda") {
+            capacidadMaxima.innerText = "4";
+          }
+        }
+
+        // Manejar cambios en la selección de horarios
+        document
+          .getElementById("horarios_disponibles")
+          .addEventListener("change", function () {
+            var selectedOption = this.options[this.selectedIndex];
+            if (!selectedOption.disabled) {
+              horariosSeleccionados.push(selectedOption.value);
+
+              // Obtén el día seleccionado
+              var diaSeleccionado =
+                document.getElementById("dias_reserva").value;
+
+              // Agrega el horario utilizado al día correspondiente
+              if (!horariosUtilizadosPorDia[diaSeleccionado]) {
+                horariosUtilizadosPorDia[diaSeleccionado] = [];
+              }
+              horariosUtilizadosPorDia[diaSeleccionado].push(
+                selectedOption.value
+              );
+
+              this.selectedIndex = -1;
+              actualizarHorariosDisponibles();
+            }
+          });
+      </script>
+
+      <script>
+        // JavaScript para manejar la selección de zona y mostrar la información
+        const zonaComunForm = document.getElementById("zonaComunForm");
+        const zonaComunInfo = document.getElementById("zonaComunInfo");
+
+        zonaComunForm.addEventListener("change", function () {
+          const selectedZona = zonaComunForm.zonaComun.value;
+          zonaComunInfo.innerHTML = obtenerInformacionZona(selectedZona);
+        });
+
+        function mostrarCapacidadMaxima() {
+          var zonaComunSelect = document.getElementById("zonaComun");
+          var capacidadMaxima = document.getElementById("capacidadMaxima");
+
+          if (zonaComunSelect.value === "SalonSocial") {
+            capacidadMaxima.textContent = "30";
+          } else if (zonaComunSelect.value === "ZonaBBQ") {
+            capacidadMaxima.textContent = "15";
+          } else if (zonaComunSelect.value === "CanchaSintetica") {
+            capacidadMaxima.textContent = "10";
+          } else if (zonaComunSelect.value === "ZonaHumeda") {
+            capacidadMaxima.textContent = "4";
+          } else {
+            capacidadMaxima.textContent = "0";
+          }
+        }
+
+        function mostrarLimiteVisitantes() {
+          var zonaComunSelect = document.getElementById("zona_comun");
+          var limiteVisitantes = document.getElementById("limite_visitantes");
+          var visitantesSelect = document.getElementById("visitantes");
+
+          if (
+            zonaComunSelect.value === "salon_social" &&
+            visitantesSelect.selectedOptions.length > 30
+          ) {
+            limiteVisitantes.style.display = "block";
+            return false;
+          } else if (
+            zonaComunSelect.value === "bbqq" &&
+            visitantesSelect.selectedOptions.length > 15
+          ) {
+            limiteVisitantes.style.display = "block";
+            return false;
+          } else if (
+            zonaComunSelect.value === "cancha" &&
+            visitantesSelect.selectedOptions.length > 10
+          ) {
+            limiteVisitantes.style.display = "block";
+            return false;
+          } else if (
+            zonaComunSelect.value === "humeda" &&
+            visitantesSelect.selectedOptions.length > 4
+          ) {
+            limiteVisitantes.style.display = "block";
+            return false;
+          } else {
+            limiteVisitantes.style.display = "none";
+            return true;
+          }
+        }
+
+        function validarCantidadVisitantes() {
+          var zonaComunSelect = document.getElementById("zona_comun");
+          var visitantesSelect = document.getElementById("visitantes");
+
+          if (
+            zonaComunSelect.value === "salon_social" &&
+            visitantesSelect.selectedOptions.length > 30
+          ) {
+            alert(
+              "¡Has alcanzado el límite de visitantes para el Salón Social!"
+            );
+            return false;
+          } else if (
+            zonaComunSelect.value === "bbqq" &&
+            visitantesSelect.selectedOptions.length > 15
+          ) {
+            alert("¡Has alcanzado el límite de visitantes para la Zona BBQ!");
+            return false;
+          } else if (
+            zonaComunSelect.value === "cancha" &&
+            visitantesSelect.selectedOptions.length > 10
+          ) {
+            alert(
+              "¡Has alcanzado el límite de visitantes para la Cancha Sintética!"
+            );
+            return false;
+          } else if (
+            zonaComunSelect.value === "humeda" &&
+            visitantesSelect.selectedOptions.length > 4
+          ) {
+            alert(
+              "¡Has alcanzado el límite de visitantes para la Zona Húmeda!"
+            );
+            return false;
+          } else {
+            return true;
+          }
+        }
+      </script>
+    </main>
+   
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{%static 'js/script1.js'%}"></script>
+  </body>
+</html>

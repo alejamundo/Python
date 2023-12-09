@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Brisas de Tokio</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/logo1.png'%}"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1,
+      shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style1.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-white overlay-menu bg-white">
+        <div class="container-fluid">
+          <button
+          class="navbar-toggler bg-white" 
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-2  hide-on-large-screen">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  ><img
+                    src="{% static 'img/logo1.png'%}"
+                    alt="logo"
+                    width="30%"
+                  />Brisas de Tokio</a
+                >
+              </li>
+            </ul>
+            <style>
+              
+              @media (max-width: 1060px) {
+              .hide-on-large-screen {
+                display: none;
+              }
+            }
+              .overlay-menu {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000; /* Ajusta este valor según sea necesario para que el menú se muestre por encima de otros elementos */
+                background-color: white; /
+              }
+              .navbar-toggler:focus {
+                background-color: white; /* Fondo blanco cuando el botón está en estado activo */
+              }
+           </style>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 bg-white">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="{% url 'index'%}"
+                  >Inicio</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'zonascomunes' %}"
+                  >Zonas Comunes</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Registros
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'registroresidentes' %}">Registro Recidentes y propietarios</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroinmuebles' %}">Registro de Inmuebles</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovisitantes' %}">Registro de Visitantes</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registroencargados' %}">Registro Encargados de zonas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'registrovehiculos' %}">Registro Vehiculos de residentes</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="{% url 'reservas' %}"
+                  >Reservas</a
+                >
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Gestionar PQRSD
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'pqrs' %}">Crear PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'procesarpqrs' %}">Gestionar PQRSD</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Listados de información
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'listadoreservas' %}">Listado de reservas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadopqrs' %}">Listado de PQRSD</a></li>
+                  <li><a class="dropdown-item" href="{% url 'listadoinmuebles' %}">Listado de Inmuebles</a></li>
+                </ul>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="p-lg-4">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            {% comment %} Mensaje de alerta si guarada la información {% endcomment %}
+            {% if messages %}
+            <div class="container mt-4">
+                {% for message in messages %}
+                <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+                >
+                {{ message }}
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+          <form method="post" class='row' action="{% url 'pqrs' %}">
+            {% csrf_token %}
+            <h3>Formulario de PQRSD <img src="{% static 'img/excelent.png' %}" width='5%' alt="zona comun" ></h3>
+
+            <div class="mb3- col-md-6">
+              <label for="id_numero_apartamento" class="form-label"
+                >Número del apartamento:</label
+              >
+              <select class="form-select rounded" id="id_numero_apartamento" name="numero_apartamento" required>
+                {% for apartamento in apartamentos %}
+                    <option value="{{ apartamento.numero_apartamento }}">{{ apartamento.numero_apartamento }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb3- col-md-6">
+              <label for="id_fecha_hora_registro" class="form-label">Fecha y Hora de Registro:</label>
+              <input type="datetime-local" class="form-control rounded" id="id_fecha_hora_registro" name="fecha_hora_registro" required>
+            </div>
+
+            <div class="mb3- col-md-6">
+              <label for="id_residente" class="form-label">Residente:</label>
+              <select class="form-select rounded" id="id_residente" name="residente" required>
+                  <option value="">Seleccione un residente</option>
+                  {% for residente in residentes %}
+                      <option value="{{ residente.id }}">{{ residente.persona.nombres }} {{ residente.persona.apellidos }}</option>
+                  {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb3- col-md-6">
+              <label for="id_tipo_pqrsd" class="form-label">Tipo de PQRSD:</label>
+              <input type="text" class="form-control rounded" id="id_tipo_pqrsd" name="tipo_pqrsd" required>
+            </div>
+
+            <div class="mb3- col-md-6">
+              <label for="id_forma_respuesta" class="form-label">Forma de respuesta:</label>
+              <select class="form-control rounded" id="id_forma_respuesta" name="forma_respuesta" required>
+                  <option value="Correo electrónico">Correo electrónico</option>
+                  <option value="Escrita">Escrita</option>
+              </select>
+            </div>
+
+            <div class="mb3- col-md-12">
+              <div class="form-group" id="direccion_escrita" style="display: none;">
+                <label for="id_respuesta_direccion" class="form-label">Dirección de respuesta:</label>
+                <input type="text" class="form-control rounded" id="id_respuesta_direccion" name="respuesta_direccion" value='-'>
+                <label for="barrio" class="form-label">Barrio:</label>
+                <input type="text" class="form-control rounded" id="barrio" name="barrio" value='-'>
+                <label for="municipio" class="form-label">Municipio:</label>
+                <input type="text" class="form-control rounded" id="municipio" name="municipio" value='-'>
+                <label for="departamento" class="form-label">Departamento:</label>
+                <input type="text" class="form-control rounded" id="departamento" name="departamento" value='-'>
+              </div>
+            </div>
+
+            <div class="mb3- col-md-12">
+              <label for="id_contenido" class="form-label">Contenido de la PQRSD:</label>
+              <textarea class="form-control rounded" id="id_contenido" name="contenido" required></textarea>
+            </div>
+
+            <div class="mt-4 col-auto">
+                <button type="submit" class="btn btn-success mb-3">Guardar PQRSD</button>
+            </div>
+          </form>
+        </div>
+      </div> 
+    </main>
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#id_forma_respuesta").on("change", function () {
+            var selectedOption = $(this).val();
+            if (selectedOption === "Escrita") {
+                $("#direccion_escrita").show();
+                $("#id_respuesta_direccion").prop("disabled", false);
+                $("#id_barrio").prop("disabled", false);
+                $("#id_municipio").prop("disabled", false);
+                $("#id_departamento").prop("disabled", false);
+            } else {
+                $("#direccion_escrita").hide();
+                $("#id_respuesta_direccion").prop("disabled", true);
+                $("#id_barrio").prop("disabled", true);
+                $("#id_municipio").prop("disabled", true);
+                $("#id_departamento").prop("disabled", true);
+            }
+        });
+      });
+    </script>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{%static 'js/script.js'%}"></script>
+  </body>
+</html>

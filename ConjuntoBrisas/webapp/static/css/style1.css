@@ -1,0 +1,28 @@
+main{
+    background-color: rgb(255, 252, 252);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.icon{
+    color: black;
+    font-size: larger;
+}
+.person{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 6%;
+    
+}
+nav{
+    font-size: larger;
+    background-color: white;
+    padding-bottom: 0;
+    height: 100px;
+    box-shadow: 0px 2px 4px rgba(44, 254, 2, 0.1);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.color{
+    color:  rgba(20, 128, 20, 0.942);
+}
+
